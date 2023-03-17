@@ -1,26 +1,25 @@
-#Data Types
+# Data Types
 
-#String
+# String
 
 print("hello"[4])
-#рахунок починається з 0.1.2.3...[]
-#Integer
+# рахунок починається з 0.1.2.3...[]
+# Integer
 print(123 + 345)
-#Float
+# Float
 3.114159
-#Boolean
+# Boolean
 True
 False
 
 3 + 5
 7 - 3
 3 * 2
-print(6 /3 )
+print(6 / 3)
 2 ** 3
-#PEMDASLR
-#()
-#**
+# PEMDASLR
+# ()
+# **
 # * /
 # + -
-print(3 * (3 + 3 ) / 3 - 3 )
-
+print(3 * (3 + 3) / 3 - 3)

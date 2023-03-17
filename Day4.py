@@ -12,7 +12,7 @@ print(random_float)
 
 # list on python
 fruits = ["Apple", "Cherry", "Limon"]
-print(fruits [2])
+print(fruits[2])
 print(fruits[-2])
 # - last item in the list
 # if change name in list
