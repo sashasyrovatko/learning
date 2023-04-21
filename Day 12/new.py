@@ -4,7 +4,7 @@ import time
 
 EASY = 10
 HARD = 5
-kilkisty_sprob = None
+number_of_attempts = None
 
 while True:
     print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
@@ -13,28 +13,28 @@ while True:
     number = randint(1, 100)
     selected_difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ")
     if selected_difficulty.lower() == 'easy':
-        kilkisty_sprob = EASY
+        number_of_attempts = EASY
     elif selected_difficulty.lower() == 'hard':
-        kilkisty_sprob = HARD
+        number_of_attempts = HARD
     elif selected_difficulty.lower() != 'easy' and selected_difficulty.lower() != 'hard':
         print('You are too dumb to play')
         break
 
-    while kilkisty_sprob > 0:
-        print(f"You have a {kilkisty_sprob} tries")
+    while number_of_attempts > 0:
+        print(f"You have a {number_of_attempts} tries")
         guess = int(input("Make a guess: "))
         if guess > number:
             print("Too high")
-            kilkisty_sprob -= 1
+            number_of_attempts -= 1
         elif guess < number:
             print("Too low")
-            kilkisty_sprob -= 1
+            number_of_attempts -= 1
         elif guess == number:
             print("You win")
             time.sleep(5)
             break
 
-    if kilkisty_sprob == 0:
+    if number_of_attempts == 0:
         print("You lose")
         print(f"Pssst, the correct answer is {number}")
         time.sleep(5)

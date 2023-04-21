@@ -14,7 +14,7 @@ r_paddle = Paddle((350, 0))
 l_paddle = Paddle((-350, 0))
 ball = Ball()
 scoreboard = Scoreboard()
-time_list = [0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01]
+
 
 screen.listen()
 screen.onkey(r_paddle.go_up, "Up")
@@ -29,7 +29,7 @@ while game_is_on:
     ball.move()
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.bounce_y()
-    if ball.distance(r_paddle) < 50 and ball.xcor() > 320 or ball.distance(l_paddle) < 50 and ball.xcor() < -320:
+    if ball.distance(r_paddle) < 45 and ball.xcor() > 320 or ball.distance(l_paddle) < 45 and ball.xcor() < -320:
         ball.bounce_x()
     if ball.xcor() > 380:
         ball.reset_position()
