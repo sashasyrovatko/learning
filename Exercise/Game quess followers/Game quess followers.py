@@ -22,7 +22,7 @@ def check_answer(guess, a_followers, b_followers):
         #     return False
         return guess == "a"
     else:
-        return  guess == "b"
+        return guess == "b"
 
 print(logo)
 score = 0
