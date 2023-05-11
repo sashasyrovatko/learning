@@ -1,4 +1,5 @@
-
+import re
+import time
 
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -8,13 +9,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from New_Proj.reader import ReaderCsv
 import pandas
 
-data = pandas.read_csv("file.csv")
-min_price = data[data.id == "0"]
 
 
 class OpenUrl(ReaderCsv):
     def __init__(self):
-        super().__init__(self)
+        super().__init__("file.csv")
         self.driver = webdriver.Chrome()
         self.data_writer = ReaderCsv('file.csv')
 
@@ -42,27 +41,34 @@ class OpenUrl(ReaderCsv):
     #     print(model_list)
 
     def navigate_to_urls1(self):
-        model_list = []
+        model_dict = {}
+        # urls = self.get_url_list()
+        #
+        # for url in urls:
+        #     self.driver.get(url)
+
         self.driver.get('https://m.ua/ua/m1_magazilla.php?katalog_=206&minPrice_=10000&maxPrice_=20000')
 
         while True:
-            models = self.driver.find_elements(By.CLASS_NAME, "list-model-title")
-            prices = self.driver.find_elements(By.XPATH, "//a[@title='Порівняти ціни! ']")
+                models = self.driver.find_elements(By.CLASS_NAME, "list-model-title")
+                prices = self.driver.find_elements(By.XPATH, "//a[@title='Порівняти ціни! ']")
 
-            for i in range(min(len(models), len(prices))):
-                model_name = models[i].text
-                price = prices[i].text
-                model_list.append((model_name, price))
+                for i in range(min(len(models), len(prices))):
+                    model_name = models[i].text
+                    price = prices[i].text
+                    price = re.sub(r'\D', '', price)
+                    model_dict[model_name] = price
 
-            try:
-                next_page_button = self.driver.find_element(By.CSS_SELECTOR, "a[id='pager_next']")
-                self.driver.execute_script("arguments[0].click();", next_page_button)
-                WebDriverWait(self.driver, 10).until(
-                    EC.presence_of_element_located((By.CLASS_NAME, "list-model-title")))
-            except NoSuchElementException:
-                break
-        self.data_writer.write_data(model_list)
-        return model_list
+                try:
+                    next_page_button = self.driver.find_element(By.CSS_SELECTOR, "a[id='pager_next']")
+                    self.driver.execute_script("arguments[0].click();", next_page_button)
+                    time.sleep(1)
+                    WebDriverWait(self.driver, 10).until(
+                        EC.presence_of_element_located((By.CLASS_NAME, "list-model-title")))
+                except NoSuchElementException:
+                    break
+        return model_dict
+
 
 
     def navigate_to_all_pages(self):
