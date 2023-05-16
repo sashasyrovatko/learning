@@ -7,6 +7,7 @@ class CheckerPrice:
         self.reader = reader
         self.open_url = open_url
 
+
     def compare_prices(self, model_dict):
         df = pd.read_csv(self.filename)
         changes_models = []
@@ -21,3 +22,6 @@ class CheckerPrice:
                     changes_models.append(model)
 
         print(changes_models)
+        return changes_models
+
+
